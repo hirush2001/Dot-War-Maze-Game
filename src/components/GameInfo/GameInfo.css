@@ -1,0 +1,18 @@
+/* =========================================================
+   GAME INFO / STATUS
+========================================================= */
+
+.game-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.game-info > div {
+  flex: 1;
+  padding: 10px;
+  background: #1b1b1b;
+  border: 1px solid #333;
+  border-radius: 6px;
+}

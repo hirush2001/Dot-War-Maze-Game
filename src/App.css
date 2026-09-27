@@ -1,4 +1,3 @@
-
 * {
   box-sizing: border-box;
 }
@@ -6,17 +5,13 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-
-  background:
-    radial-gradient(
-      circle at top,
-      #202020,
-      #0b0b0b 70%
-    );
-
+  background: radial-gradient(
+    circle at top,
+    #202020,
+    #0b0b0b 70%
+  );
   color: white;
 }
-
 
 /* =========================================================
    MAIN CONTAINER
@@ -25,831 +20,102 @@ body {
 .game-container {
   width: 800px;
   max-width: 95%;
-
   margin: 30px auto;
-
   text-align: center;
 }
 
-
 h1 {
   letter-spacing: 8px;
-
   margin-bottom: 10px;
-
   font-size: 34px;
 }
 
-
 /* =========================================================
-   LEGEND
+   LEGEND (OPTIONAL REFERENCE)
 ========================================================= */
 
 .legend {
   display: flex;
-
   justify-content: center;
-
   align-items: center;
-
   flex-wrap: wrap;
-
   gap: 18px;
-
   margin-bottom: 18px;
-
   font-size: 14px;
-
   color: #ccc;
 }
 
-
 .legend-item {
   display: flex;
-
   align-items: center;
-
   gap: 7px;
 }
-
 
 .legend-dot {
   width: 13px;
   height: 13px;
-
   border-radius: 50%;
-
   display: inline-block;
 }
 
-
 .legend-player {
   background: #00e676;
-
-  box-shadow:
-    0 0 10px #00e676;
+  box-shadow: 0 0 10px #00e676;
 }
-
 
 .legend-ai {
   background: #ff1744;
-
-  box-shadow:
-    0 0 10px #ff1744;
+  box-shadow: 0 0 10px #ff1744;
 }
-
 
 .legend-noise {
   background: #ffeb3b;
-
-  box-shadow:
-    0 0 10px #ffeb3b;
+  box-shadow: 0 0 10px #ffeb3b;
 }
-
 
 .legend-last-known {
   background: #ff9800;
-
-  box-shadow:
-    0 0 10px #ff9800;
+  box-shadow: 0 0 10px #ff9800;
 }
-
 
 .legend-predicted {
   background: #2196f3;
-
-  box-shadow:
-    0 0 10px #2196f3;
+  box-shadow: 0 0 10px #2196f3;
 }
-
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-.game-info {
-  display: flex;
-
-  justify-content: space-between;
-
-  gap: 15px;
-
-  margin-bottom: 15px;
-}
-
-
-.game-info > div {
-  flex: 1;
-
-  padding: 10px;
-
-  background: #1b1b1b;
-
-  border:
-    1px solid #333;
-
-  border-radius: 6px;
-}
-
-
-/* =========================================================
-   GAME BOARD
-========================================================= */
-
-.game-board {
-  position: relative;
-
-  width: 700px;
-  height: 450px;
-
-  max-width: 100%;
-
-  margin: auto;
-
-  background:
-    linear-gradient(
-      #151515,
-      #101010
-    );
-
-  border:
-    2px solid #666;
-
-  box-shadow:
-    0 0 30px
-    rgba(0, 0, 0, 0.8);
-
-  overflow: hidden;
-}
-
-
-/* =========================================================
-   MAZE WALLS
-========================================================= */
-
-.wall {
-  position: absolute;
-
-  width: 25px;
-  height: 25px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #555,
-      #333
-    );
-
-  border:
-    1px solid #777;
-
-  z-index: 4;
-
-  box-shadow:
-    inset 0 0 4px
-    rgba(255, 255, 255, 0.1);
-}
-
-
-/* =========================================================
-   PLAYER
-========================================================= */
-
-.player {
-  position: absolute;
-
-  width: 18px;
-  height: 18px;
-
-  border-radius: 50%;
-
-  background: #00e676;
-
-  border:
-    2px solid white;
-
-  box-shadow:
-    0 0 8px #00e676,
-    0 0 18px #00e676;
-
-  z-index: 20;
-
-  pointer-events: none;
-}
-
-
-/*
-  Small center marker
-*/
-
-.player::after {
-  content: "";
-
-  position: absolute;
-
-  width: 5px;
-  height: 5px;
-
-  left: 50%;
-  top: 50%;
-
-  transform:
-    translate(-50%, -50%);
-
-  border-radius: 50%;
-
-  background: white;
-}
-
-
-/* =========================================================
-   AI ENEMY
-========================================================= */
-
-.ai {
-  position: absolute;
-
-  width: 20px;
-  height: 20px;
-
-  border-radius: 50%;
-
-  background: #ff1744;
-
-  border:
-    2px solid white;
-
-  box-shadow:
-    0 0 10px #ff1744,
-    0 0 22px #ff1744;
-
-  z-index: 21;
-
-  pointer-events: none;
-
-  animation:
-    aiPulse 1s infinite;
-}
-
-
-@keyframes aiPulse {
-  0% {
-    box-shadow:
-      0 0 7px #ff1744,
-      0 0 15px #ff1744;
-  }
-
-  50% {
-    box-shadow:
-      0 0 12px #ff1744,
-      0 0 28px #ff1744;
-  }
-
-  100% {
-    box-shadow:
-      0 0 7px #ff1744,
-      0 0 15px #ff1744;
-  }
-}
-
-
-/* =========================================================
-   AI LABEL
-========================================================= */
-
-.ai::before {
-  content: "AI";
-
-  position: absolute;
-
-  top: -22px;
-
-  left: 50%;
-
-  transform:
-    translateX(-50%);
-
-  color: #ff5252;
-
-  font-size: 11px;
-
-  font-weight: bold;
-
-  white-space: nowrap;
-}
-
-
-/* =========================================================
-   PLAYER LABEL
-========================================================= */
-
-.player::before {
-  content: "YOU";
-
-  position: absolute;
-
-  top: -22px;
-
-  left: 50%;
-
-  transform:
-    translateX(-50%);
-
-  color: #00e676;
-
-  font-size: 11px;
-
-  font-weight: bold;
-
-  white-space: nowrap;
-}
-
-
-/* =========================================================
-   AI VISION
-========================================================= */
-
-.vision-circle {
-  position: absolute;
-
-  border:
-    1px dashed
-    rgba(156, 39, 176, 0.6);
-
-  background:
-    rgba(156, 39, 176, 0.06);
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  z-index: 1;
-}
-
-
-/* =========================================================
-   ATTACK RANGE
-========================================================= */
-
-.attack-range {
-  position: absolute;
-
-  border:
-    2px dashed
-    rgba(255, 23, 68, 0.8);
-
-  background:
-    rgba(255, 23, 68, 0.05);
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  z-index: 6;
-
-  animation:
-    attackPulse 0.8s infinite;
-}
-
-
-@keyframes attackPulse {
-  0% {
-    opacity: 0.5;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.5;
-  }
-}
-
-
-/* =========================================================
-   NOISE
-========================================================= */
-
-.noise-circle {
-  position: absolute;
-
-  border:
-    2px dashed
-    #ffeb3b;
-
-  background:
-    rgba(255, 235, 59, 0.05);
-
-  border-radius: 50%;
-
-  pointer-events: none;
-
-  z-index: 2;
-
-  animation:
-    noisePulse 0.8s
-    ease-out;
-}
-
-
-@keyframes noisePulse {
-
-  0% {
-    opacity: 1;
-
-    transform:
-      scale(0.3);
-  }
-
-  100% {
-    opacity: 0;
-
-    transform:
-      scale(1);
-  }
-}
-
-
-/* =========================================================
-   LAST KNOWN POSITION
-========================================================= */
-
-.last-known {
-  position: absolute;
-
-  width: 14px;
-  height: 14px;
-
-  border:
-    2px solid
-    #ff9800;
-
-  background:
-    rgba(255, 152, 0, 0.15);
-
-  border-radius: 50%;
-
-  z-index: 7;
-
-  animation:
-    lastKnownPulse 1s
-    infinite;
-}
-
-
-.last-known::after {
-  content: "?";
-
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  transform:
-    translate(-50%, -50%);
-
-  color: #ff9800;
-
-  font-size: 9px;
-
-  font-weight: bold;
-}
-
-
-@keyframes lastKnownPulse {
-
-  0% {
-    transform:
-      scale(1);
-
-    opacity: 1;
-  }
-
-  50% {
-    transform:
-      scale(1.5);
-
-    opacity: 0.5;
-  }
-
-  100% {
-    transform:
-      scale(1);
-
-    opacity: 1;
-  }
-}
-
-
-/* =========================================================
-   PREDICTED POSITION
-========================================================= */
-
-.predicted-position {
-  position: absolute;
-
-  width: 14px;
-  height: 14px;
-
-  border:
-    2px solid
-    #2196f3;
-
-  background:
-    rgba(33, 150, 243, 0.15);
-
-  border-radius: 50%;
-
-  z-index: 8;
-
-  animation:
-    predictedPulse 0.7s
-    infinite;
-}
-
-
-.predicted-position::after {
-  content: "→";
-
-  position: absolute;
-
-  left: 50%;
-  top: 50%;
-
-  transform:
-    translate(-50%, -50%);
-
-  color: #2196f3;
-
-  font-size: 10px;
-
-  font-weight: bold;
-}
-
-
-@keyframes predictedPulse {
-
-  0% {
-    opacity: 0.5;
-  }
-
-  50% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.5;
-  }
-}
-
-
-/* =========================================================
-   A* PATH
-========================================================= */
-
-.path-node {
-  position: absolute;
-
-  width: 5px;
-  height: 5px;
-
-  background:
-    #aaa;
-
-  border-radius: 50%;
-
-  transform:
-    translate(-50%, -50%);
-
-  z-index: 3;
-
-  pointer-events: none;
-
-  opacity: 0.7;
-}
-
 
 /* =========================================================
    MESSAGE
 ========================================================= */
 
 .game-container > h2 {
-
   min-height: 30px;
-
-  margin:
-    15px 0;
-
+  margin: 15px 0;
   color: #ddd;
-
   font-size: 17px;
 }
 
-
 /* =========================================================
-   AI PANEL
-========================================================= */
-
-.ai-panel {
-
-  width: 350px;
-
-  max-width: 100%;
-
-  margin:
-    15px auto;
-
-  padding: 15px;
-
-  background:
-    #181818;
-
-  border:
-    1px solid #333;
-
-  border-radius: 8px;
-
-  text-align: left;
-}
-
-
-.ai-panel h3 {
-
-  margin-top: 0;
-
-  color: #bb86fc;
-
-  text-align: center;
-}
-
-
-.ai-panel div {
-
-  margin:
-    6px 0;
-
-  padding:
-    5px 8px;
-
-  background:
-    #222;
-
-  border-radius: 4px;
-
-  font-size: 13px;
-}
-
-
-/* =========================================================
-   AI INFORMATION
-========================================================= */
-
-.ai-info {
-
-  margin:
-    15px auto;
-
-  padding:
-    10px;
-
-  max-width: 500px;
-
-  color: #aaa;
-
-  font-size: 13px;
-}
-
-
-.ai-info p {
-
-  margin:
-    5px 0;
-}
-
-
-/* =========================================================
-   CONTROLS
-========================================================= */
-
-.controls {
-
-  margin-top:
-    15px;
-
-  color: #aaa;
-
-  line-height:
-    1.6;
-
-  font-size: 14px;
-}
-
-
-/* =========================================================
-   GAME OVER
-========================================================= */
-
-.game-over {
-
-  margin-top:
-    20px;
-
-  padding:
-    25px;
-
-  background:
-    #181818;
-
-  border:
-    1px solid #444;
-
-  border-radius:
-    8px;
-}
-
-
-.game-over h2 {
-
-  font-size:
-    28px;
-
-  margin-bottom:
-    20px;
-}
-
-
-.game-over button {
-
-  padding:
-    12px 25px;
-
-  border:
-    1px solid #777;
-
-  border-radius:
-    5px;
-
-  background:
-    #333;
-
-  color:
-    white;
-
-  cursor:
-    pointer;
-
-  font-weight:
-    bold;
-
-  font-size:
-    15px;
-}
-
-
-.game-over button:hover {
-
-  background:
-    #444;
-}
-
-
-/* =========================================================
-   MOBILE
+   MOBILE RESPONSIVENESS
 ========================================================= */
 
 @media (max-width: 600px) {
-
   .game-container {
-    margin:
-      15px auto;
+    margin: 15px auto;
   }
 
   .game-info {
-    flex-direction:
-      column;
-
-    gap:
-      8px;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .game-board {
-    width:
-      100%;
-
-    height:
-      auto;
-
-    aspect-ratio:
-      28 / 18;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 28 / 18;
   }
 
   .legend {
-    gap:
-      10px;
-
-    font-size:
-      12px;
+    gap: 10px;
+    font-size: 12px;
   }
 }
-

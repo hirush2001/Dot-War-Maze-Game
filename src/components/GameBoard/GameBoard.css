@@ -1,0 +1,282 @@
+/* =========================================================
+   GAME BOARD & ENTITIES
+========================================================= */
+
+.game-board {
+  position: relative;
+  width: 700px;
+  height: 450px;
+  max-width: 100%;
+  margin: auto;
+  background: linear-gradient(#151515, #101010);
+  border: 2px solid #666;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+/* =========================================================
+   MAZE WALLS
+========================================================= */
+
+.wall {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: linear-gradient(135deg, #555, #333);
+  border: 1px solid #777;
+  z-index: 4;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #00e676;
+  border: 2px solid white;
+  box-shadow:
+    0 0 8px #00e676,
+    0 0 18px #00e676;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* Small center marker */
+.player::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: white;
+}
+
+/* Player label */
+.player::before {
+  content: "YOU";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #00e676;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   AI ENEMY
+========================================================= */
+
+.ai {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ff1744;
+  border: 2px solid white;
+  box-shadow:
+    0 0 10px #ff1744,
+    0 0 22px #ff1744;
+  z-index: 21;
+  pointer-events: none;
+  animation: aiPulse 1s infinite;
+}
+
+@keyframes aiPulse {
+  0% {
+    box-shadow:
+      0 0 7px #ff1744,
+      0 0 15px #ff1744;
+  }
+  50% {
+    box-shadow:
+      0 0 12px #ff1744,
+      0 0 28px #ff1744;
+  }
+  100% {
+    box-shadow:
+      0 0 7px #ff1744,
+      0 0 15px #ff1744;
+  }
+}
+
+/* AI label */
+.ai::before {
+  content: "AI";
+  position: absolute;
+  top: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ff5252;
+  font-size: 11px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* =========================================================
+   AI VISION
+========================================================= */
+
+.vision-circle {
+  position: absolute;
+  border: 1px dashed rgba(156, 39, 176, 0.6);
+  background: rgba(156, 39, 176, 0.06);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================================================
+   ATTACK RANGE
+========================================================= */
+
+.attack-range {
+  position: absolute;
+  border: 2px dashed rgba(255, 23, 68, 0.8);
+  background: rgba(255, 23, 68, 0.05);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 6;
+  animation: attackPulse 0.8s infinite;
+}
+
+@keyframes attackPulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+/* =========================================================
+   NOISE
+========================================================= */
+
+.noise-circle {
+  position: absolute;
+  border: 2px dashed #ffeb3b;
+  background: rgba(255, 235, 59, 0.05);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+  animation: noisePulse 0.8s ease-out;
+}
+
+@keyframes noisePulse {
+  0% {
+    opacity: 1;
+    transform: scale(0.3);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   LAST KNOWN POSITION
+========================================================= */
+
+.last-known {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ff9800;
+  background: rgba(255, 152, 0, 0.15);
+  border-radius: 50%;
+  z-index: 7;
+  animation: lastKnownPulse 1s infinite;
+}
+
+.last-known::after {
+  content: "?";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #ff9800;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+@keyframes lastKnownPulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* =========================================================
+   PREDICTED POSITION
+========================================================= */
+
+.predicted-position {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #2196f3;
+  background: rgba(33, 150, 243, 0.15);
+  border-radius: 50%;
+  z-index: 8;
+  animation: predictedPulse 0.7s infinite;
+}
+
+.predicted-position::after {
+  content: "→";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #2196f3;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+@keyframes predictedPulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+/* =========================================================
+   A* PATH
+========================================================= */
+
+.path-node {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #aaa;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0.7;
+}
